@@ -24,6 +24,13 @@ def find_terminal_server():
         print("nvim-wrapper needs gnome-terminal-server, but it wasn't found.")
         sys.exit()
 
+
+def get_nvim_path():
+    try:
+        return os.environ['NVIM_PATH']
+    except:
+        return 'nvim'
+
 SERVER_CMD = [
     find_terminal_server(),
     '--app-id', APP_ID,
@@ -37,7 +44,7 @@ TERM_CMD = [
     '--name', NAME,
     '--hide-menubar',
     '-x',
-    'nvim',
+    get_nvim_path(),
 ]
 GTERM_PASSTHROUGH_OPTIONS = [
     '--full-screen',
